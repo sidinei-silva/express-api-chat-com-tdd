@@ -15,6 +15,14 @@ const chatSocket = (server: Server) => {
         socket.leave(room);
       });
     });
+
+    socket.on(
+      'sendMessage',
+      (message: string, userId: string, room: string) => {
+        console.log(`${userId} - ${message} in ${room}`);
+        socket.to(room).emit('chatMessage', { userId, message });
+      },
+    );
   });
 
   io.on('disconnect', socket => {
