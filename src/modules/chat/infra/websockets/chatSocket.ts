@@ -5,6 +5,15 @@ const chatSocket = (server: Server) => {
 
   io.on('connection', socket => {
     console.log('socket connected');
+    socket.on('joinRoom', (room, userId) => {
+      socket.join(room);
+      console.log(`${userId} joined ${room}`);
+
+      socket.on('disconnect', () => {
+        console.log(`${socket.id} disconnected`);
+        socket.leave(room);
+      });
+    });
   });
 
   io.on('disconnect', socket => {
