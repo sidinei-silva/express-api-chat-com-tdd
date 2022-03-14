@@ -8,7 +8,7 @@ const chatSocket = (server: Server) => {
     socket.on('joinRoom', (room, userId) => {
       socket.join(room);
       console.log(`${userId} joined ${room}`);
-      socket.emit('userConnected', `${userId} joined ${room}`);
+      socket.to(room).emit('userConnected', `${userId} joined ${room}`);
 
       socket.on('disconnect', () => {
         console.log(`${socket.id} disconnected`);
