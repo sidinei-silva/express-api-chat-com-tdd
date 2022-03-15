@@ -1,46 +1,55 @@
-# Project Title
+# Express API chat com Testes
 
 ## Table of Contents
 
-- [About](#about)
+- [Sobre](#about)
 - [Getting Started](#getting_started)
-- [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
 
-## About <a name = "about"></a>
+## Sobre <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Este projeto foi desenvolvido para a gravação do video tutorial (Desenvolvendo Chat API com Multiplas salas, usando Socket IO e Testes)
+
+## Pré-requisitos <a name = "requirements"></a>
 
 ## Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+Estas instruções fornecerão a você uma cópia do projeto em execução em sua máquina local para fins de desenvolvimento e teste
 
-### Prerequisites
+### Pré-requisitos
 
-What things you need to install the software and how to install them.
+- [Docker](https://www.docker.com/) v20.10 ou superior
+- [Docker Compose](https://docs.docker.com/compose/install/) v2.2
+- [NodeJS](https://nodejs.org/en/) v12 ou superior
 
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
+Uma série de exemplos passo a passo que informam como executar um ambiente de desenvolvimento.
 
-Say what the step will be
+- Clone o projeto em sua máquina.
+- Instale o Docker e o Docker-Compose.
+- Navegue até a raiz do projeto.
+- Na raiz do projeto mude o arquivo ```.env.example``` para ```.env```
+- Instale os pacotes necessários localmente com o comando:
 
-```
-Give the example
-```
+    ```
+    npm install
+    ```
+    ou
+    ```
+    yarn install
+    ``` 
+- Rode os containers com o comando: 
+    ```
+    docker-compose up --build
+    ```
+  Ou Rode o projeto sem docker com o comando
 
-And repeat
+    ```
+    yarn run dev
+    ```
+    ```
+    npm run dev
+    ```
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## Usage <a name = "usage"></a>
-
-Add notes about how to use the system.
+Por fim o servidor estara no ar aguardando conexão client do socket.
