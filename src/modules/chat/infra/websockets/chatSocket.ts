@@ -1,17 +1,19 @@
 import { Server } from 'socket.io';
 
+import { logger } from '@shared/infra/logging/logger';
+
 const chatSocket = (server: Server) => {
   const io = server.of('/chat');
 
   io.on('connection', socket => {
-    console.log('socket connected');
+    logger.info('Socket connected');
     socket.on('joinRoom', (room, userId) => {
       socket.join(room);
-      console.log(`${userId} joined ${room}`);
+      logger.info(`${userId} joined ${room}`);
       socket.to(room).emit('userConnected', `${userId} joined ${room}`);
 
       socket.on('disconnect', () => {
-        console.log(`${socket.id} disconnected`);
+        logger.info(`${userId} disconnected`);
         socket.leave(room);
       });
     });
@@ -19,14 +21,15 @@ const chatSocket = (server: Server) => {
     socket.on(
       'sendMessage',
       (message: string, userId: string, room: string) => {
-        console.log(`${userId} - ${message} in ${room}`);
+        logger.info(`${userId} - ${message} in ${room}`);
         socket.to(room).emit('chatMessage', { userId, message });
       },
     );
   });
 
   io.on('disconnect', socket => {
-    console.log('socket disconnected');
+    logger.info('Socket disconnected');
+
     socket.close();
   });
 };
