@@ -45,4 +45,16 @@ describe('Teste chat websocket', () => {
 
     clientSocketTwo.emit('joinRoom', roomId, userTwo);
   });
+
+  test('should send message', done => {
+    const messageSend = 'Hello World';
+
+    clientSocketOne.on('chatMessage', ({ userId, message }) => {
+      expect(userId).toBe(userTwo);
+      expect(message).toBe(messageSend);
+      done();
+    });
+
+    clientSocketTwo.emit('sendMessage', messageSend, userTwo, roomId);
+  });
 });
